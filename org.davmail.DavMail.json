@@ -38,12 +38,12 @@
       "name": "davmail",
       "buildsystem": "simple",
       "build-commands": [
-        "sed -i s,-trunk,-2652, build.xml", /* version hack, update this when url changes */
+        "sed -i s,-trunk,-2801, build.xml", /* version hack, update this when url changes */
         "ant/bin/ant prepare-dist",
         "install -Dp -m 755 src/bin/davmail /app/bin/davmail",
-        "install -Dp -m 644 src/contribs/rpm/SOURCES/davmail.desktop /app/share/applications/org.davmail.DavMail.desktop",
+        "install -Dp -m 644 src/desktop/davmail.desktop /app/share/applications/org.davmail.DavMail.desktop",
         "install -Dp -m 644 dist/davmail.png /app/share/icons/hicolor/128x128/apps/org.davmail.DavMail.png",
-        "install -Dp -m 644 org.davmail.DavMail.appdata.xml --target-directory=/app/share/appdata",
+        "install -Dp -m 644 src/appstream/org.davmail.DavMail.appdata.xml --target-directory=/app/share/appdata",
         "install -Dp -m 644 dist/davmail.jar /app/share/davmail/davmail.jar",
         "mkdir -p /app/share/davmail/lib",
         "find dist -name *.jar -exec install -Dp -m 644 \"{}\" /app/share/davmail/lib/ \\;"
@@ -51,8 +51,8 @@
       "sources" : [
         {
           "type": "archive",
-          "url": "https://sourceforge.net/projects/davmail/files/davmail/4.9.0/davmail-src-4.9.0-2652.tgz",
-          "sha256": "b812a33b2d8cb9a45e57be0625fd8441b912d1053d545d5012251d5fe6fc9fb9"
+          "url": "https://sourceforge.net/projects/davmail/files/davmail/5.0.0/davmail-src-5.0.0-2801.tgz",
+          "sha256": "8dd3158b854bfb43e14cc287a2d7595fc5b347ee95adb37a67180cb21aaed9d2"
         },
         {
           "type": "patch",
@@ -60,21 +60,13 @@
         },
         {
           "type": "patch",
-          "path": "0002-desktop-file-remove-deprecations-and-duplicate-main-.patch"
-        },
-        {
-          "type": "patch",
-          "path": "0001-DesktopBrowser-add-support-for-xdg-open-directly.patch"
+          "path": "appdata.patch"
         },
         {
           "type": "archive",
           "url": "https://archive.apache.org/dist/ant/binaries/apache-ant-1.10.2-bin.tar.xz",
           "sha256": "361c8ad2ed8341416e323e7c28af10a8297170a80fdffba294a5c2031527bb6c",
           "dest": "ant"
-        },
-        {
-          "type": "file",
-          "path": "org.davmail.DavMail.appdata.xml"
         }
       ],
       "cleanup": [
