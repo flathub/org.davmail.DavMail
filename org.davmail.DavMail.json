@@ -22,7 +22,7 @@
   /* Could be done during the build below, but these are all related to relocation */
   "cleanup-commands": [
     "sed -i 's,/usr,/app,g'                        /app/bin/davmail",
-    "sed -i 's,exec java,exec /app/jre/bin/java,g' /app/bin/davmail",
+    "sed -i 's,JAVA=java,JAVA=/app/jre/bin/java,g' /app/bin/davmail",
     "sed -i 's,/usr,/app,g'                        /app/share/applications/org.davmail.DavMail.desktop",
     "sed -i 's,Icon=.*,Icon=org.davmail.DavMail,g' /app/share/applications/org.davmail.DavMail.desktop"
   ],
