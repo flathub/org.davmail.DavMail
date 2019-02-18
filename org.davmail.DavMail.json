@@ -38,7 +38,7 @@
       "name": "davmail",
       "buildsystem": "simple",
       "build-commands": [
-        "sed -i s,-trunk,-2891, build.xml", /* version hack, update this when url changes */
+        "sed -i s,-trunk,-2961, build.xml", /* version hack, update this when url changes */
         "ant/bin/ant prepare-dist",
         "install -Dp -m 755 src/bin/davmail /app/bin/davmail",
         "install -Dp -m 644 src/desktop/davmail.desktop /app/share/applications/org.davmail.DavMail.desktop",
@@ -51,16 +51,12 @@
       "sources" : [
         {
           "type": "archive",
-          "url": "https://sourceforge.net/projects/davmail/files/davmail/5.1.0/davmail-src-5.1.0-2891.tgz",
-          "sha256": "36234835a62ce18d534c130b225589257b8476810c0f60e9c44a45a450c34a83"
+          "url": "https://sourceforge.net/projects/davmail/files/davmail/5.2.0/davmail-src-5.2.0-2961.tgz",
+          "sha256": "017887959d2969e16a105ce7d71c669dcc9a955a79ba67a783767e8c1dd61d8f"
         },
         {
           "type": "patch",
           "path": "0001-Show-main-window-on-Fedora-Gnome.patch"
-        },
-        {
-          "type": "patch",
-          "path": "appdata.patch"
         },
         {
           "type": "archive",
