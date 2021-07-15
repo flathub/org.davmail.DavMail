@@ -38,7 +38,7 @@
       "name": "davmail",
       "buildsystem": "simple",
       "build-commands": [
-        "sed -i s,-trunk,-3299, build.xml", /* version hack, update this when url changes */
+        "sed -i s,-trunk,-3375, build.xml", /* version hack, update this when url changes */
         "ant/bin/ant prepare-dist",
         "install -Dp -m 755 src/bin/davmail /app/bin/davmail",
         "install -Dp -m 644 src/desktop/davmail.desktop /app/share/applications/org.davmail.DavMail.desktop",
@@ -51,12 +51,8 @@
       "sources" : [
         {
           "type": "archive",
-          "url": "https://sourceforge.net/projects/davmail/files/davmail/5.5.1/davmail-src-5.5.1-3299.tgz",
-          "sha256": "63e14eeda3fed2a1a5c55f864a8832f8842d597e797ca1e8874c9b66b811f508"
-        },
-        {
-          "type": "patch",
-          "path": "0001-Linux-Gnome-Desktop-fix-systray-support.patch"
+          "url": "https://sourceforge.net/projects/davmail/files/davmail/6.0.0/davmail-src-6.0.0-3375.tgz",
+          "sha256": "2d719188671f7a621c82ce7bc6d1d781ed18c8d52a9af23e7bc5288df2b649a5"
         },
         {
           "type": "patch",
