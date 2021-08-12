@@ -59,6 +59,10 @@
           "path": "davmail-appdata-validate.patch"
         },
         {
+          "type": "patch",
+          "path": "davmail-desktop-add-wm-class.patch"
+        },
+        {
           "type": "archive",
           "url": "https://archive.apache.org/dist/ant/binaries/apache-ant-1.10.2-bin.tar.xz",
           "sha256": "361c8ad2ed8341416e323e7c28af10a8297170a80fdffba294a5c2031527bb6c",
