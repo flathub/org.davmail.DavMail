@@ -1,0 +1,23 @@
+From 8470c463c72753e86061613c13080225ff625c6e Mon Sep 17 00:00:00 2001
+From: Stan Janssen <stan@finetuned.nl>
+Date: Thu, 12 Aug 2021 22:42:09 +0200
+Subject: [PATCH] Add StartupWMClass to the .desktop file
+
+This solves a problem when running the application on elementaryOS
+where the dock icon gets duplicated
+---
+ src/desktop/davmail.desktop | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/src/desktop/davmail.desktop b/src/desktop/davmail.desktop
+index 09c7556..1c5cb43 100644
+--- a/src/desktop/davmail.desktop
++++ b/src/desktop/davmail.desktop
+@@ -9,3 +9,4 @@ Icon=davmail
+ Categories=GTK;GNOME;Network;Email;
+ Keywords=pop;imap;smtp;exchange;owa;outlook
+ GenericName=DavMail POP/IMAP/SMTP/Caldav/Carddav/LDAP Exchange Gateway
++StartupWMClass=davmail-DavGateway
+-- 
+2.25.1
+
