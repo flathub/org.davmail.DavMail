@@ -38,7 +38,7 @@
       "name": "davmail",
       "buildsystem": "simple",
       "build-commands": [
-        "sed -i s,-trunk,-3375, build.xml", /* version hack, update this when url changes */
+        "sed -i s,-trunk,-3390, build.xml", /* version hack, update this when url changes */
         "ant/bin/ant prepare-dist",
         "install -Dp -m 755 src/bin/davmail /app/bin/davmail",
         "install -Dp -m 644 src/desktop/davmail.desktop /app/share/applications/org.davmail.DavMail.desktop",
@@ -51,8 +51,8 @@
       "sources" : [
         {
           "type": "archive",
-          "url": "https://sourceforge.net/projects/davmail/files/davmail/6.0.0/davmail-src-6.0.0-3375.tgz",
-          "sha256": "2d719188671f7a621c82ce7bc6d1d781ed18c8d52a9af23e7bc5288df2b649a5"
+          "url": "https://sourceforge.net/projects/davmail/files/davmail/6.0.1/davmail-src-6.0.1-3390.tgz",
+          "sha256": "ce3b33cd187787a30ccc136e75f1cdf197b0a2874c20ab3f3ea3e426b32b9ab1"
         },
         {
           "type": "patch",
