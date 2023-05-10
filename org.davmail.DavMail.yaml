@@ -13,6 +13,7 @@ finish-args:
   # Network access
   - --share=network
   - --env=JAVA_HOME=/app/jre
+command: davmail
 build-options:
   append-path: /usr/lib/sdk/openjdk11/bin
 # Could be done during the build below, but these are all related to relocation
