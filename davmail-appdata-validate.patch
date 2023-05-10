@@ -1,5 +1,5 @@
---- davmail-src-6.0.1-3390/src/appstream/org.davmail.DavMail.appdata.xml.orig	2021-12-03 09:13:21.000000000 -0700
-+++ davmail-src-6.0.1-3390/src/appstream/org.davmail.DavMail.appdata.xml	2022-01-27 20:50:19.859130058 -0700
+--- davmail-src-6.1.0-3423.orig/src/appstream/org.davmail.DavMail.appdata.xml	2023-03-19 10:08:38.000000000 -0600
++++ davmail-src-6.1.0-3423/src/appstream/org.davmail.DavMail.appdata.xml	2023-05-10 09:29:38.564037260 -0600
 @@ -5,33 +5,15 @@
    <metadata_license>CC0-1.0</metadata_license>
    <summary>DavMail POP/IMAP/SMTP/Caldav/Carddav/LDAP Exchange Gateway</summary>
@@ -37,7 +37,140 @@
        <image>http://davmail.sourceforge.net/images/davmailArchitecture.png</image>
      </screenshot>
    </screenshots>
-@@ -42,150 +24,97 @@
+@@ -40,208 +22,176 @@
+   <content_rating type="oars-1.1" />
+   <releases>
+       <release version="6.1.0" date="2023-03-19">
+-          <description>
+-              <p>
+-                  First release in a long time to publish pending changes, including Kerberos support fix,
+-                  experimental number matching support for upcoming Microsoft authenticator default configuration change,
+-                  store new refresh token received at authentication.
+-                  In addition, some Log4J specific patches to remove vulnerable classes from library
+-                  (even if DavMail is not impacted with standard configuration)
+-
+-                  ### O365
+-                  - O365: implement number matching logic in O365Authenticator
+-                  - O365: retrieve number matching value during phone app MFA
+-                  - O365: adjust logging level on O365 refresh token error
+-                  - O365: change persist token logic to store new refresh token after succesful refresh
+-                  - Experimental: store refreshed token when davmail.storeRefreshedToken=true
+-
+-                  ### Windows
+-                  - Windows: Add missing labelReplace active wait with wait/notifyAll in DavService
+-                  - Update winrun4j wrappers after lib upgrades
+-
+-                  ### Linux
+-                  - Linux: block davmail azul when davmail script is located under /usr/bin (package installed)
+-                  - Linux: fix PosixFilePermissions for writeable only by user
+-                  - Linux: try to make .davmail.properties file readable by user only on create
+-                  - Linux: improve launch script to take into account script location
+-
+-
+-                  ### Enhancements
+-                  - Add missing label
+-                  - Replace active wait with wait/notifyAll
+-                  - Upgrade woodstox to 1.4.0 and jettison to 1.5.3
+-                  - Merge https://github.com/mguessan/davmail/pull/225 remove (most) http:// links in Maven POM
+-                  - Make ScheduledThreadPool thread daemon
+-                  - Switch to https for version check
+-                  - DavMailIdleConnectionEvictor fix from audit
+-                  - Refactor DavMailIdleConnectionEvictor to be less agressive on idle connection checks/purge and use scheduler instead of active polling
+-                  - Override SPNegoScheme to take into account DavMail kerberos settings
+-
+-                  ### Documentation
+-                  - Sample syslog configuration
+-                  - Update current version in README.md
+-                  - OSX: remove reference to Growl in documentation
+-                  - Doc: security note on DavMail not vulnerable to CVE-2021-44228
+-                  - Doc: add a section on Fedora installation from copr
+-
+-                  ### Caldav
+-                  - Caldav: Do not try to update modified occurrences on Mozilla thunderbird dismiss event
+-
+-                  ### Security
+-                  - Security: Strip packaged log4j jar from JMSSink and JDBCAppender to ensure DavMail is not vulnerable to CVE-2022-23305 & CVE-2022-23302, see https://github.com/mguessan/davmail/issues/250
+-                  - Remove JMSAppender, SMTPAppender and SocketServer from Log4J binary as an additional security measure (CVE-2019-17571 CVE-2021-4104), even if DavMail is not vulnerable with standard configuration
+-                  - Upgrade Log4J to latest version 1.2.17 in Winrun4J wrappers
+-                  - Upgrade Log4J to latest version 1.2.17
+-              </p>
+-          </description>
++        <description>
++          <p>
++            First release in a long time to publish pending changes, including Kerberos support fix,
++            experimental number matching support for upcoming Microsoft authenticator default configuration change,
++            store new refresh token received at authentication.
++            In addition, some Log4J specific patches to remove vulnerable classes from library
++            (even if DavMail is not impacted with standard
++            configuration)
++          </p>
++
++          <p>O365</p>
++          <ul>
++            <li>implement number matching logic in O365Authenticator</li>
++            <li>retrieve number matching value during phone app MFA</li>
++            <li>adjust logging level on O365 refresh token error</li>
++            <li>change persist token logic to store new refresh token after succesful refresh</li>
++            <li>Experimental: store refreshed token when
++            davmail.storeRefreshedToken=true</li>
++          </ul>
++
++          <p>Windows</p>
++          <ul>
++            <li>Add missing labelReplace active wait with wait/notifyAll in DavService</li>
++            <li>Update winrun4j wrappers after lib upgrades</li>
++          </ul>
++
++          <p>Linux</p>
++          <ul>
++            <li>Linux: block davmail azul when davmail script is located under /usr/bin (package installed)</li>
++            <li>Linux: fix PosixFilePermissions for writeable only by user</li>
++            <li>Linux: try to make .davmail.properties file readable by user only on create</li>
++            <li>Linux: improve launch script to take into account
++            script location</li>
++          </ul>
++
++
++          <p>Enhancements</p>
++          <ul>
++            <li>Add missing label</li>
++            <li>Replace active wait with wait/notifyAll</li>
++            <li>Upgrade woodstox to 1.4.0 and jettison to 1.5.3</li>
++            <li>Remove (most) http links in Maven POM</li>
++            <li>Make ScheduledThreadPool thread daemon</li>
++            <li>Switch to https for version check</li>
++            <li>DavMailIdleConnectionEvictor fix from audit</li>
++            <li>Refactor DavMailIdleConnectionEvictor to be less agressive on idle connection checks/purge and use scheduler instead of active polling</li>
++            <li>Override SPNegoScheme to take into account DavMail kerberos settings</li>
++          </ul>
++
++          <p>Documentation</p>
++
++          <ul>
++            <li>Sample syslog configuration</li>
++            <li>Update current version in README.md</li>
++            <li>OSX: remove reference to Growl in documentation</li>
++            <li>Doc: security note on DavMail not vulnerable to CVE-2021-44228</li>
++            <li>Doc: add a section on Fedora installation from
++            copr</li>
++          </ul>
++
++          <p>Caldav</p>
++          <ul>
++            <li>Caldav: Do not try to update modified
++            occurrences on Mozilla thunderbird dismiss
++            event</li>
++          </ul>
++
++          <p>Security</p>
++          <ul>
++            <li>Security: Strip packaged log4j jar from JMSSink and JDBCAppender to ensure DavMail is not vulnerable to CVE-2022-23305 &amp; CVE-2022-23302</li>
++            <li>Remove JMSAppender, SMTPAppender and SocketServer from Log4J binary as an additional security measure (CVE-2019-17571 CVE-2021-4104), even if DavMail is not vulnerable with standard configuration</li>
++            <li>Upgrade Log4J to latest version 1.2.17 in Winrun4J wrappers</li>
++            <li>Upgrade Log4J to latest version 1.2.17</li>
++          </ul>
++        </description>
+       </release>
        <release version="6.0.1" date="2021-12-03">
            <description>
                <p>
@@ -268,7 +401,7 @@
        </description>
        </release>
        <release version="5.5.0" date="2019-04-15">
-@@ -197,160 +126,6 @@
+@@ -253,160 +203,6 @@
              Notable changes for end users are Oauth token persistence to avoid frequent O365 authentications and OIDC support for
              personal outlook accounts.
              Known issues: some users reported regressions with form authentication, please report such regressions with log files.
