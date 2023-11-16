@@ -1,5 +1,5 @@
---- davmail-src-6.1.0-3423.orig/src/appstream/org.davmail.DavMail.appdata.xml	2023-03-19 10:08:38.000000000 -0600
-+++ davmail-src-6.1.0-3423/src/appstream/org.davmail.DavMail.appdata.xml	2023-05-10 09:29:38.564037260 -0600
+--- davmail-src-6.2.0.orig/src/appstream/org.davmail.DavMail.appdata.xml	2023-11-05 10:19:56.000000000 -0700
++++ davmail-src-6.2.0/src/appstream/org.davmail.DavMail.appdata.xml	2023-11-16 14:29:06.337079100 -0700
 @@ -5,33 +5,15 @@
    <metadata_license>CC0-1.0</metadata_license>
    <summary>DavMail POP/IMAP/SMTP/Caldav/Carddav/LDAP Exchange Gateway</summary>
@@ -37,9 +37,154 @@
        <image>http://davmail.sourceforge.net/images/davmailArchitecture.png</image>
      </screenshot>
    </screenshots>
-@@ -40,208 +22,176 @@
-   <content_rating type="oars-1.1" />
+@@ -41,271 +23,261 @@
    <releases>
+       <release version="6.2.0" date="2023-11-05">
+           <description>
+-              <p>
+-                  Another bugfix release to merge user contributions from Github, refactor Linux build, upgrade dependencies and a few IMAP and Caldav fixes.
+-
+-                  ### Security
+-                  - Update htmlcleaner to 2.29 cf CVE-2023-34624
+-
+-                  ### Enhancements
+-                  - Drop Travis-ci, no longer working for opensource projects
+-                  - fix quotes from audit
+-                  - Remove space at end of line +0630=Myanmar Standard Time, see https://github.com/mguessan/davmail/issues/309
+-                  - Fix https://github.com/mguessan/davmail/issues/271, keep line order and comments on settings save
+-                  - Fix from audit
+-                  - Maven: convert pom.xml to UTF-8
+-
+-                  ### IMAP
+-                  - IMAP: merge fix suggested on https://github.com/mguessan/davmail/issues/298
+-                  - IMAP: merge according to last comment on https://github.com/mguessan/davmail/pull/239
+-                  - IMAP: improve bodystructure handling, merge https://github.com/mguessan/davmail/pull/239
+-                  - IMAP: implement APPENDUID and advertise UIDPLUS
+-                  - IMAP: implement APPENDUID and advertise UIDPLUS
+-                  - IMAP: Prepare uidplus, fetch message after create
+-
+-                  ### Caldav
+-                  - Caldav: Fix nullpointer as in https://github.com/mguessan/davmail/issues/303
+-                  - Caldav: Fix https://github.com/mguessan/davmail/issues/309 Thunderbird daily sends TZOFFSETTO with optional second value
+-                  - Caldav: adjust isLightning test to include Thunderbird user agent, see https://github.com/mguessan/davmail/issues/287
+-
+-                  ### Linux
+-                  - Linux: based on https://github.com/mguessan/davmail/pull/290 by Björn Bidar <bjorn.bidar@thaodan.de>, remove svn commit reference in davmail.spec
+-                  - Remove svn tag from folder name inside source packages
+-                  - Linux: remove chkconfig from Requires preun and post in davmail.spec as suggested on build.opensuse.org
+-                  - Linux: dos2unix davmail.changes
+-                  - Linux: update changelog with Björn Bidar <bjorn.bidar@thaodan.de> contribution from https://github.com/mguessan/davmail/pull/289
+-                  - Linux: Add back changelog file and convert to OpenSUSE format from https://github.com/mguessan/davmail/pull/289
+-                  - Linux: Merge changes from https://github.com/mguessan/davmail/pull/290 except %version that may impact release cycle
+-                  - Linux: convert davmail.spec changelog to OpenSUSE format, see https://github.com/mguessan/davmail/pull/290
+-                  - Linux: restore spec file with lf and changelog, see https://github.com/mguessan/davmail/pull/289
+-                  - Linux: remove downloaded azul jdk package
+-
+-                  ### ADFS
+-                  - ADFS: merge https://github.com/mguessan/davmail/pull/270 by Felix Engelmann, enable ADFS authentication with SAML assertions
+-
+-                  ### EWS
+-                  - EWS: Cleanup from audit
+-                  - EWS: fix https://github.com/mguessan/davmail/issues/299 avoid logging large response message content
+-                  - EWS: BackOffMilliseconds unit test
+-                  - EWS: parse BackOffMilliseconds value on throttling
+-
+-                  ### O365
+-                  - O365: in O365 interactive, use invokeAndWait on failover to manual to avoid multiple instances of popup window
+-                  - Upgrade jettison to 1.5.4 in pom.xml
+-                  - Upgrade jettison to 1.5.4
+-
+-                  ### Windows
+-                  - Windows: drop explicit reference to sun.security.mscapi.SunMSCAPI, Windows-MY should be available on all windows JDK
+-
+-                  ### Documentation
+-                  - Doc: Update server properties documentation with davmail.oauth.persistToken
+-                  - Doc: fix link to SonarCloud
+-              </p>
++            <p>
++              Another bugfix release to merge user contributions
++              from Github, refactor Linux build, upgrade
++              dependencies and a few IMAP and Caldav fixes.
++            </p>
++
++            <p>Security</p>
++            <ul>
++              <li>Update htmlcleaner to 2.29 cf CVE-2023-34624</li>
++            </ul>
++
++            <p>Enhancements</p>
++            <ul>
++              <li>Drop Travis-ci, no longer working for opensource projects</li>
++              <li>fix quotes from audit</li>
++              <li>Remove space at end of line +0630=Myanmar Standard Time, see issue #309</li>
++              <li>Fix issue #271, keep line order and comments on settings save</li>
++              <li>Fix from audit</li>
++              <li>Maven: convert pom.xml to UTF-8</li>
++            </ul>
++
++            <p>IMAP</p>
++            <ul>
++              <li>merge fix suggested on issue #298</li>
++              <li>merge according to last comment on PR #239</li>
++              <li>improve bodystructure handling, merge PR #239</li>
++              <li>implement APPENDUID and advertise UIDPLUS</li>
++              <li>implement APPENDUID and advertise UIDPLUS</li>
++              <li>Prepare uidplus, fetch message after create</li>
++            </ul>
++
++            <p>Caldav</p>
++            <ul>
++              <li>Fix nullpointer as in issue #303</li>
++              <li>Fix issue #309 Thunderbird daily sends TZOFFSETTO with optional second value</li>
++              <li>adjust isLightning test to include Thunderbird user agent, see issue #287</li>
++            </ul>
++
++            <p>Linux</p>
++            <ul>
++              <li>based on PR #290 by Björn Bidar &lt;bjorn.bidar@thaodan.de&gt;, remove svn commit reference in davmail.spec</li>
++              <li>Remove svn tag from folder name inside source packages</li>
++              <li>remove chkconfig from Requires preun and post in davmail.spec as suggested on build.opensuse.org</li>
++              <li>dos2unix davmail.changes</li>
++              <li>update changelog with Björn Bidar &lt;bjorn.bidar@thaodan.de&gt; contribution from PR #289 </li>
++              <li>Add back changelog file and convert to OpenSUSE format from PR #289</li>
++              <li>Merge changes from PR #290 except %version that may impact release cycle</li>
++              <li>convert davmail.spec changelog to OpenSUSE format, see PR #290</li>
++              <li>restore spec file with lf and changelog, see PR #290</li>
++              <li>remove downloaded azul jdk package</li>
++            </ul>
++
++            <p>ADFS</p>
++            <ul>
++              <li>merge PR #270 by Felix Engelmann, enable ADFS authentication with SAML assertions</li>
++            </ul>
++
++            <p>EWS</p>
++            <ul>
++              <li>Cleanup from audit</li>
++              <li>fix issue #299 avoid logging large response message content</li>
++              <li>BackOffMilliseconds unit test</li>
++              <li>parse BackOffMilliseconds value on throttling</li>
++            </ul>
++
++            <p>O365</p>
++            <ul>
++              <li>O365: in O365 interactive, use invokeAndWait on failover to manual to avoid multiple instances of popup window</li>
++              <li>Upgrade jettison to 1.5.4 in pom.xml</li>
++              <li>Upgrade jettison to 1.5.4</li>
++            </ul>
++
++            <p>Windows</p>
++            <ul>
++              <li>Windows: drop explicit reference to sun.security.mscapi.SunMSCAPI, Windows-MY should be available on all windows JDK</li>
++            </ul>
++
++            <p>Documentation</p>
++            <ul>
++              <li>Doc: Update server properties documentation with davmail.oauth.persistToken</li>
++              <li>Doc: fix link to SonarCloud</li>
++            </ul>
+           </description>
+       </release>
        <release version="6.1.0" date="2023-03-19">
 -          <description>
 -              <p>
@@ -401,7 +546,7 @@
        </description>
        </release>
        <release version="5.5.0" date="2019-04-15">
-@@ -253,160 +203,6 @@
+@@ -317,160 +289,6 @@
              Notable changes for end users are Oauth token persistence to avoid frequent O365 authentications and OIDC support for
              personal outlook accounts.
              Known issues: some users reported regressions with form authentication, please report such regressions with log files.

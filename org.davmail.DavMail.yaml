@@ -16,6 +16,8 @@ finish-args:
 command: davmail
 build-options:
   append-path: /usr/lib/sdk/openjdk11/bin
+  env:
+    - --env=JAVA_HOME=/app/jre
 # Could be done during the build below, but these are all related to relocation
 cleanup-commands:
   - sed -i 's,/usr,/app,g'                        /app/bin/davmail
@@ -31,7 +33,7 @@ modules:
     buildsystem: simple
     build-commands:
       # version hack, update this when url changes
-      - sed -i s,-trunk,-3423, build.xml
+      - sed -i s,-trunk,-3464, build.xml
       - ant/bin/ant prepare-dist
       - install -Dp -m 755 src/bin/davmail /app/bin/davmail
       - install -Dp -m 644 src/desktop/davmail.desktop /app/share/applications/org.davmail.DavMail.desktop
@@ -42,8 +44,8 @@ modules:
       - find dist -name *.jar -exec install -Dp -m 644 "{}" /app/share/davmail/lib/ \;
     sources:
       - type: archive
-        url: https://sourceforge.net/projects/davmail/files/davmail/6.1.0/davmail-src-6.1.0-3423.tgz
-        sha256: 08e7103d14e9f05ec269caceef7585dcf8be202a35c471fa6fc12729cf99ef2f
+        url: https://sourceforge.net/projects/davmail/files/davmail/6.2.0/davmail-src-6.2.0-3464.tgz
+        sha256: f23df061c196c6e86d38eac0752208b1d30788acd4d4ade032e84794433d753f
       - type: patch
         path: davmail-appdata-validate.patch
       - type: patch
