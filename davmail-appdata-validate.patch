@@ -1,5 +1,6 @@
---- davmail-src-6.2.0.orig/src/appstream/org.davmail.DavMail.appdata.xml	2023-11-05 10:19:56.000000000 -0700
-+++ davmail-src-6.2.0/src/appstream/org.davmail.DavMail.appdata.xml	2023-11-16 14:29:06.337079100 -0700
+diff -urN davmail-src-6.2.1.orig/src/appstream/org.davmail.DavMail.appdata.xml davmail-src-6.2.1/src/appstream/org.davmail.DavMail.appdata.xml
+--- davmail-src-6.2.1.orig/src/appstream/org.davmail.DavMail.appdata.xml	2024-01-04 07:57:59.000000000 -0700
++++ davmail-src-6.2.1/src/appstream/org.davmail.DavMail.appdata.xml	2024-01-19 14:54:18.306390166 -0700
 @@ -5,33 +5,15 @@
    <metadata_license>CC0-1.0</metadata_license>
    <summary>DavMail POP/IMAP/SMTP/Caldav/Carddav/LDAP Exchange Gateway</summary>
@@ -37,8 +38,112 @@
        <image>http://davmail.sourceforge.net/images/davmailArchitecture.png</image>
      </screenshot>
    </screenshots>
-@@ -41,271 +23,261 @@
+@@ -39,319 +21,322 @@
+   <developer_name>Mickaël Guessant</developer_name>
+   <content_rating type="oars-1.1" />
    <releases>
+-      <release version="6.2.1" date="2024-04-01">
++      <release version="6.2.1" date="2024-01-04">
+           <description>
+-              <p>
+-                  Most changes are related to build process and rpm packaging for Fedora/RHEL, also includes a few bug fixes on IMAP
+-
+-                  ### Security
+-                  - Security: Upgrade commons codec to 1.15
+-
+-                  ### O365
+-                  - O365: cleanup from audit
+-                  - O365: no longer apply the disable integrity check workaround by default, fixed in openjfx
+-                  - O365: add a warning message on FIDO authentication triggered
+-                  - O365: allow refresh token persistence without provided password
+-                  - O365: Merge https://github.com/mguessan/davmail/pull/236 Changed authentication link log level
+-
+-                  ### Linux
+-                  - Linux: refactor spec file for fedora, do not call old init service scripts and compile with openjfx
+-                  - Linux: Fix systemd condition for fedora in spec file
+-                  - Linux: Adjust JDK dependencies for RPM build
+-
+-                  ### Build
+-                  - AppVeyor: Cleanup
+-                  - AppVeyor: copy plugin to x86-unicode
+-                  - AppVeyor: switch to server 2019
+-                  - Appveyor: investigate java versions
+-                  - AppVeyor: set ANT_HOME value
+-                  - AppVeyor: update ant path
+-                  - AppVeyor: update ant download path
+-                  - Run Sonar scan under JDK19
+-                  - Switch Appveyor build to JDK 19
+-                  - Maven: fix urls from https://github.com/mguessan/davmail/pull/225 by Stefan Weil
+-
+-                  ### IMAP
+-                  - IMAP: merge patch from https://github.com/mguessan/davmail/pull/140, return folders including special use folders when query is %
+-                  - IMAP: implement fetch macro flags, see https://github.com/mguessan/davmail/issues/314
+-                  - IMAP: fix APPENDUID value order
+-
+-                  ### Enhancements
+-                  - Cleanup from audit
+-                  - Fix typo
+-                  - NTLM: improve logging of NTLM negotiation
+-                  - Update Winrun4J wrappers with commons codec 1.15
+-
+-              </p>
++            <p>
++              Most changes are related to build process and rpm
++              packaging for Fedora/RHEL, also includes a few bug
++              fixes on IMAP
++            </p>
++
++            <p>Security</p>
++            <ul>
++              <li>Upgrade commons codec to 1.15</li>
++            </ul>
++
++            <p>O365</p>
++            <ul>
++              <li>cleanup from audit</li>
++              <li>no longer apply the disable integrity check workaround by default, fixed in openjfx</li>
++              <li>add a warning message on FIDO authentication triggered</li>
++              <li>allow refresh token persistence without provided password</li>
++              <li>Merge PR #236 Changed authentication link log level</li>
++            </ul>
++
++            <p>Linux</p>
++            <ul>
++              <li>refactor spec file for fedora, do not call old init service scripts and compile with openjfx</li>
++              <li>Fix systemd condition for fedora in spec file</li>
++              <li>Adjust JDK dependencies for RPM build</li>
++            </ul>
++
++            <p>Build</p>
++            <ul>
++              <li>AppVeyor: Cleanup</li>
++              <li>AppVeyor: copy plugin to x86-unicode</li>
++              <li>AppVeyor: switch to server 2019</li>
++              <li>Appveyor: investigate java versions</li>
++              <li>AppVeyor: set ANT_HOME value</li>
++              <li>AppVeyor: update ant path</li>
++              <li>AppVeyor: update ant download path</li>
++              <li>Run Sonar scan under JDK19</li>
++              <li>Switch Appveyor build to JDK 19</li>
++              <li>Maven: fix urls from PR #225 by Stefan Weil</li>
++            </ul>
++
++            <p>IMAP</p>
++            <ul>
++              <li>merge patch from PR #140, return folders including special use folders when query is %</li>
++              <li>implement fetch macro flags, see issue #314</li>
++              <li>fix APPENDUID value order</li>
++            </ul>
++
++            <p>Enhancements</p>
++            <ul>
++              <li>Cleanup from audit</li>
++              <li>Fix typo</li>
++              <li>NTLM: improve logging of NTLM negotiation</li>
++              <li>Update Winrun4J wrappers with commons codec 1.15</li>
++            </ul>
+           </description>
+       </release>
        <release version="6.2.0" date="2023-11-05">
            <description>
 -              <p>
@@ -546,7 +651,7 @@
        </description>
        </release>
        <release version="5.5.0" date="2019-04-15">
-@@ -317,160 +289,6 @@
+@@ -363,160 +348,6 @@
              Notable changes for end users are Oauth token persistence to avoid frequent O365 authentications and OIDC support for
              personal outlook accounts.
              Known issues: some users reported regressions with form authentication, please report such regressions with log files.
