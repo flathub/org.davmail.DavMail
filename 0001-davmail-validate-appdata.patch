@@ -1,7 +1,17 @@
-diff -urN davmail-src-6.2.1.orig/src/appstream/org.davmail.DavMail.appdata.xml davmail-src-6.2.1/src/appstream/org.davmail.DavMail.appdata.xml
---- davmail-src-6.2.1.orig/src/appstream/org.davmail.DavMail.appdata.xml	2024-01-04 07:57:59.000000000 -0700
-+++ davmail-src-6.2.1/src/appstream/org.davmail.DavMail.appdata.xml	2024-01-19 14:54:18.306390166 -0700
-@@ -5,33 +5,15 @@
+From 39e0f743abaeda6312ee288d53ddaf3b7eca329f Mon Sep 17 00:00:00 2001
+From: Wade Berrier <wberrier@gmail.com>
+Date: Wed, 24 Apr 2024 14:59:28 -0600
+Subject: [PATCH] davmail: validate appdata
+
+---
+ src/appstream/org.davmail.DavMail.appdata.xml | 935 ++++++++----------
+ 1 file changed, 399 insertions(+), 536 deletions(-)
+
+diff --git a/src/appstream/org.davmail.DavMail.appdata.xml b/src/appstream/org.davmail.DavMail.appdata.xml
+index 6ed235de..6bc7749d 100644
+--- a/src/appstream/org.davmail.DavMail.appdata.xml
++++ b/src/appstream/org.davmail.DavMail.appdata.xml
+@@ -5,423 +5,440 @@
    <metadata_license>CC0-1.0</metadata_license>
    <summary>DavMail POP/IMAP/SMTP/Caldav/Carddav/LDAP Exchange Gateway</summary>
    <description>
@@ -29,21 +39,195 @@ diff -urN davmail-src-6.2.1.orig/src/appstream/org.davmail.DavMail.appdata.xml d
 +    mail protocols: POP/IMAP/SMTP/CalDav/LDAP.
      </p>
    </description>
-   <url type="homepage">http://davmail.sourceforge.net</url>
+-  <url type="homepage">http://davmail.sourceforge.net</url>
++  <launchable type="desktop-id">org.davmail.DavMail.desktop</launchable>
++  <url type="homepage">https://davmail.sourceforge.net</url>
    <url type="donation">https://sourceforge.net/donate/index.php?group_id=184600</url>
    <screenshots>
      <screenshot type="default">
 -      <image>https://screenshots.debian.net/screenshots/000/015/485/large.png</image>
-+      <image>https://screenshots.debian.net/shrine/screenshot/15485/simage/large-1377ceec45321621933f680286904542.png</image>
-       <image>http://davmail.sourceforge.net/images/davmailArchitecture.png</image>
+-      <image>http://davmail.sourceforge.net/images/davmailArchitecture.png</image>
++      <image>https://davmail.sourceforge.net/images/davmailArchitecture.png</image>
      </screenshot>
    </screenshots>
-@@ -39,319 +21,322 @@
-   <developer_name>Mickaël Guessant</developer_name>
+   <project_license>GPL-2.0</project_license>
+-  <developer_name>Mickaël Guessant</developer_name>
++  <developer id="org.davmail">
++    <name>Mickaël Guessant</name>
++  </developer>
    <content_rating type="oars-1.1" />
    <releases>
--      <release version="6.2.1" date="2024-04-01">
-+      <release version="6.2.1" date="2024-01-04">
+-      <release version="6.2.2" date="2024-03-30">
+-          ## DavMail 6.2.2 2024-03-30
+-          Includes some build process fixes, use jlink to build a customized jre for standalone package,
+-          Thunderbird configuration documentation updated with new screenshots.
+-          Also implemented a new -token command line option to launch O365InteractiveAuthenticator and get an authentication token.
+-
+-          Most changes are related to build process and rpm packaging for Fedora/RHEL, also includes a few bug fixes on IMAP
+-
+-          ### OSX
+-          - OSX: document how to embed Zulu jre inside DavMail app
+-
+-          ### Enhancements
+-          - Fix comment in DavMail shell
+-          - Detect missing network connectivity during token refresh to avoid invalidating token
+-          - Upgrade JCIFS to 1.3.19 for NTLM support
+-          - Cleanup from audit
+-          - Drop war package from release files, there are more modern ways to run DavMail in server mode without a webapp container
+-          - From audit: place LOCK.wait in a loop
+-          - Fix from audit, use try with resource
+-          - Cleanup from audit, remove deprecated getSubjectDN, getIssuerDN
+-
+-          ### O365
+-          - O365: Improve error message on missing add-exports, see https://github.com/mguessan/davmail/issues/344
+-          - O365: Refactor manual authentication dialog to clearly separate steps
+-          - Remove explicit dependency on O365InteractiveAuthenticator for -token option
+-          - Implement a -token option to launch interactive authenticator and print obtained refresh token, see https://github.com/mguessan/davmail/issues/338
+-          - O365: Try to adjust ItemId to 140 length, see https://github.com/mguessan/davmail/issues/328
+-          - O365: prepare GCC-High/DoD endpoints support, fix regression
+-          - O365: prepare GCC-High/DoD endpoints support, move outlook login url references to Settings
+-          - O365: prepare GCC-High/DoD endpoints support, move outlook url references to Settings
+-
+-          ### EWS
+-          - EWS: Properly set errorDetail on xml stream error to raise exception
+-          - EWS: disable IS_SUPPORTING_EXTERNAL_ENTITIES to fix xml parsing security warning
+-
+-          ### Caldav
+-          - Fix https://github.com/mguessan/davmail/issues/342 map America/Winnipeg to Central Standard Time
+-          - Caldav: Fix https://github.com/mguessan/davmail/issues/337 take timezone into account when looking for excluded occurrence
+-          - Fix settings implementation, # are allowed in values, see https://github.com/mguessan/davmail/issues/326
+-
+-          ### IMAP
+-          - IMAP: fix https://github.com/mguessan/davmail/issues/339 classcast exception on malformed content
+-
+-          ### Build
+-          - Maven: update compiler to 3.10.1
+-          - Maven: optimize dependencies
+-          - Maven: exclure httpclient 3 transitive dependency
+-          - Appveyor: build only master branch
+-          - Build: use jlink to create a custom jre to reduce embedded jre size
+-
+-          ### Security
+-          - Security: fix security alert on Runtime.getRuntime().exec
+-          - Security: fix security alert on Runtime.getRuntime().exec
+-
+-          ### Linux
+-          - Linux: force GTK2 only with SWT
+-          - Linux: switch to Azul JRE 17 with "davmail azul" command
+-          - Linux: Enable OpenJFX on Fedora to make O365Interactive work with Java 17 and later
+-
+-          ### Documentation
+-          - Doc: update roadmap
+-          - Doc: Add donation buttons to Github main readme page
+-          - Doc: update Thunderbird documentation messages
+-          - Update release guide, mvn install file no longer required
+-          - Doc: update Thunderbird documentation, as requested in https://github.com/mguessan/davmail/issues/294
+-          - Doc: update documentation for Thunderbird configuration
+-          - Doc: use COPR badge
+-          - Doc: update release guide
+-          - Doc: reference OpenSuse build service and Fedora COPR for RPM based linux distributions
+-          - Update changes file for https://build.opensuse.org/package/show/home:mguessan:davmail/davmail
++    <release version="6.2.2" date="2024-03-30">
++      <description>
++        <p>
++          Includes some build process fixes, use jlink to build a
++          customized jre for standalone package, Thunderbird
++          configuration documentation updated with new screenshots.
++
++          Also implemented a new -token command line option to launch
++          O365InteractiveAuthenticator and get an authentication
++          token.
++
++          Most changes are related to build process and rpm packaging
++          for Fedora/RHEL, also includes a few bug fixes on IMAP
++        </p>
++
++        <p>OSX</p>
++        <ul>
++          <li>document how to embed Zulu jre inside DavMail app</li>
++        </ul>
++
++        <p>Enhancements</p>
++        <ul>
++          <li>Fix comment in DavMail shell</li>
++          <li>Detect missing network connectivity during token refresh to avoid invalidating token</li>
++          <li>Upgrade JCIFS to 1.3.19 for NTLM support</li>
++          <li>Cleanup from audit</li>
++          <li>Drop war package from release files, there are more modern ways to run DavMail in server mode without a webapp container</li>
++          <li>From audit: place LOCK.wait in a loop</li>
++          <li>Fix from audit, use try with resource</li>
++          <li>Cleanup from audit, remove deprecated getSubjectDN, getIssuerDN</li>
++        </ul>
++
++        <p>O365</p>
++        <ul>
++          <li>Improve error message on missing add-exports, see #344</li>
++          <li>Refactor manual authentication dialog to clearly separate steps</li>
++          <li>Remove explicit dependency on O365InteractiveAuthenticator for -token option</li>
++          <li>Implement a -token option to launch interactive authenticator and print obtained refresh token, see #338</li>
++          <li>Try to adjust ItemId to 140 length, see #328</li>
++          <li>prepare GCC-High/DoD endpoints support, fix regression</li>
++          <li>prepare GCC-High/DoD endpoints support, move outlook login url references to Settings</li>
++          <li>prepare GCC-High/DoD endpoints support, move outlook url references to Settings</li>
++        </ul>
++
++        <p>EWS</p>
++        <ul>
++          <li>Properly set errorDetail on xml stream error to raise exception</li>
++          <li>disable IS_SUPPORTING_EXTERNAL_ENTITIES to fix xml parsing security warning</li>
++        </ul>
++
++        <p>Caldav</p>
++        <ul>
++          <li>Fix #342 map America/Winnipeg to Central Standard Time</li>
++          <li>Fix #337 take timezone into account when looking for excluded occurrence</li>
++          <li>Fix settings implementation, # are allowed in values, see #326</li>
++        </ul>
++
++        <p>IMAP</p>
++        <ul>
++          <li>fix #339 classcast exception on malformed content</li>
++        </ul>
++
++        <p>Build</p>
++        <ul>
++          <li>Maven: update compiler to 3.10.1</li>
++          <li>Maven: optimize dependencies</li>
++          <li>Maven: exclure httpclient 3 transitive dependency</li>
++          <li>Appveyor: build only master branch</li>
++          <li>use jlink to create a custom jre to reduce embedded jre
++          size</li>
++        </ul>
++
++        <p>Security</p>
++        <ul>
++          <li>Security: fix security alert on Runtime.getRuntime().exec</li>
++          <li>Security: fix security alert on Runtime.getRuntime().exec</li>
++        </ul>
++
++        <p>Linux</p>
++        <ul>
++          <li>force GTK2 only with SWT</li>
++          <li>switch to Azul JRE 17 with "davmail azul" command</li>
++          <li>Enable OpenJFX on Fedora to make O365Interactive work with Java 17 and later</li>
++        </ul>
++
++        <p>Documentation</p>
++        <ul>
++          <li>update roadmap</li>
++          <li>Add donation buttons to Github main readme page</li>
++          <li>update Thunderbird documentation messages</li>
++          <li>Update release guide, mvn install file no longer required</li>
++          <li>update Thunderbird documentation, as requested in #294</li>
++          <li>update documentation for Thunderbird configuration</li>
++          <li>use COPR badge</li>
++          <li>update release guide</li>
++          <li>reference OpenSuse build service and Fedora COPR for RPM based linux distributions</li>
++          <li>Update changes file for opensuse build service</li>
++        </ul>
++        </description>
+       </release>
+       <release version="6.2.1" date="2024-01-04">
            <description>
 -              <p>
 -                  Most changes are related to build process and rpm packaging for Fedora/RHEL, also includes a few bug fixes on IMAP
@@ -85,7 +269,6 @@ diff -urN davmail-src-6.2.1.orig/src/appstream/org.davmail.DavMail.appdata.xml d
 -                  - Fix typo
 -                  - NTLM: improve logging of NTLM negotiation
 -                  - Update Winrun4J wrappers with commons codec 1.15
--
 -              </p>
 +            <p>
 +              Most changes are related to build process and rpm
@@ -651,7 +834,7 @@ diff -urN davmail-src-6.2.1.orig/src/appstream/org.davmail.DavMail.appdata.xml d
        </description>
        </release>
        <release version="5.5.0" date="2019-04-15">
-@@ -363,160 +348,6 @@
+@@ -433,160 +450,6 @@
              Notable changes for end users are Oauth token persistence to avoid frequent O365 authentications and OIDC support for
              personal outlook accounts.
              Known issues: some users reported regressions with form authentication, please report such regressions with log files.
@@ -812,3 +995,6 @@ diff -urN davmail-src-6.2.1.orig/src/appstream/org.davmail.DavMail.appdata.xml d
          </p>
        </description>
      </release>
+-- 
+2.44.0
+
