@@ -33,7 +33,7 @@ modules:
     buildsystem: simple
     build-commands:
       # version hack, update this when url changes
-      - sed -i s,-trunk,-3496, build.xml
+      - sed -i s,-trunk,-3546, build.xml
       - ant/bin/ant prepare-dist
       - install -Dp -m 755 src/bin/davmail /app/bin/davmail
       - install -Dp -m 644 src/desktop/davmail.desktop /app/share/applications/org.davmail.DavMail.desktop
@@ -44,10 +44,10 @@ modules:
       - find dist -name *.jar -exec install -Dp -m 644 "{}" /app/share/davmail/lib/ \;
     sources:
       - type: archive
-        url: https://sourceforge.net/projects/davmail/files/davmail/6.2.1/davmail-src-6.2.1-3496.tgz
-        sha256: 4a203f05546763fdd02f1d2f319362c26401c380e57c8a6b505d21d85462a195
+        url: https://sourceforge.net/projects/davmail/files/davmail/6.2.2/davmail-src-6.2.2-3546.tgz
+        sha256: 5da4ad73d378fb70ab73a0f262ba359311c244eb618a904e6887c3805f438e3d
       - type: patch
-        path: davmail-appdata-validate.patch
+        path: 0001-davmail-validate-appdata.patch
       - type: patch
         path: davmail-desktop-add-wm-class.patch
       - type: archive
