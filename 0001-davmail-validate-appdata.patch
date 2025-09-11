@@ -3,8 +3,8 @@ Subject: [PATCH] davmail: validate appdata
 ===================================================================
 diff --git a/src/appstream/org.davmail.DavMail.appdata.xml b/src/appstream/org.davmail.DavMail.appdata.xml
 --- a/src/appstream/org.davmail.DavMail.appdata.xml	(revision 3767)
-+++ b/src/appstream/org.davmail.DavMail.appdata.xml	(date 1757619540880)
-@@ -5,831 +5,748 @@
++++ b/src/appstream/org.davmail.DavMail.appdata.xml	(date 1757621537156)
+@@ -5,831 +5,750 @@
    <metadata_license>CC0-1.0</metadata_license>
    <summary>DavMail POP/IMAP/SMTP/Caldav/Carddav/LDAP Exchange Gateway</summary>
    <description>
@@ -293,68 +293,68 @@ diff --git a/src/appstream/org.davmail.DavMail.appdata.xml b/src/appstream/org.d
 -          - Graph: switch to v2.0 OIDC endpoint for graph authentication, adjust token endpoint accordingly
 +          <p>Graph</p>
 +          <ul>
-+          <li>handle cancelled occurrences on events to build EXDATE vCalendar properties</li>
-+          <li>make progress on event recurrence implementation, see https://learn.microsoft.com/en-us/graph/api/resources/patternedrecurrence</li>
-+          <li>initiate recurrence implementation</li>
-+          <li>fix draft handling, draft is set for mapi PR_MESSAGE_FLAGS property combined with read flag by IMAPConnection</li>
-+          <li>tasks don't have a changeKey field, retrieve etag value from @odata.etag</li>
-+          <li>switch back to custom scopes</li>
-+          <li>manage task items returned as part of default calendar requests</li>
-+          <li>map taskstatus field to status graphId</li>
-+          <li>handle item not found with HttpNotFoundException</li>
-+          <li>implement isMainCalendar</li>
-+          <li>debug ALTDESC for thunderbird, need to urlencode content</li>
-+          <li>implement etag search for events and contacts</li>
-+          <li>handle html body and attendees for caldav support</li>
-+          <li>move convertClassFromExchange and convertClassToExchange to ExchangeSession</li>
-+          <li>Checkpoint on event management, new tasks handling based on new todo endpoint and make progress on calendar events</li>
-+          <li>Move some reference tables from EwsExchangeSession to ExchangeSession to make them available in GraphExchangeSession</li>
-+          <li>Cleanup from audit</li>
-+          <li>Additional entry points for graphid value in ExtendedFieldURI</li>
-+          <li>implement optDateTimeTimeZone in GraphObject to convert DateTimeTimeZone json objects</li>
-+          <li>new TODO objects in graph require Tasks.ReadWrite OIDC scope</li>
-+          <li>implement specific date conversion convertCalendarDateToGraph for graph api</li>
-+          <li>implement more condition logic and retrieve VTIMEZONE from properties</li>
-+          <li>add a full dump of all timezone definitions as graph does not provide a way to retrieve events as VCALENDAR</li>
-+          <li>make progress on graph attributes handling, refactor GraphObject</li>
-+          <li>implement fileAs on contacts and fix bday handling</li>
-+          <li>handle empty boolean custom property, return null for empty email</li>
-+          <li>switch to .default for OIDC scopes, will help with outlook desktop tokens, detect 50128 error code using outlook desktop clientid with live.com account</li>
-+          <li>refactor GraphObject handling</li>
-+          <li>refactor GraphExchangeSession, cleanup code</li>
-+          <li>implement custom graphid on Field/ExtendedFieldURI</li>
-+          <li>refactor graph properties handling</li>
-+          <li>main contact management implementation, create and update contact, handle attached photo</li>
-+          <li>implement HttpPut calls and introduce GraphResponse as a wrapper around json response messages</li>
-+          <li>improve graphId compute logic, add namespaceGuid for DistinguishedPropertySetType.Address, introduce isNumber to avoid error on empty number fields</li>
-+          <li>minimal form submit for live.com authentication</li>
-+          <li>implement live.com authentication with simple username/password</li>
-+          <li>add additional scopes to send mail, manage contacts and access shared mailboxes</li>
-+          <li>Cleanup from audit</li>
-+          <li>replace method names with constants</li>
-+          <li>fix approximate message and implement message update (properties only)</li>
-+          <li>Handle special folders based on well known names</li>
-+          <li>implement contact folders management</li>
-+          <li>update TestExchangeSessionFolder unit tests for graph backend</li>
-+          <li>Implement calendar folder handling</li>
-+          <li>Improve logging and performance in GraphRequestBuilder</li>
-+          <li>Implement IOUtil.convertToBytes to convert JSON to byte array without creating a string</li>
-+          <li>Enhancements for audit</li>
-+          <li>Fix iterator, nextLink page can be empty</li>
-+          <li>enable GraphExchangeSession in ExchangeSessionFactory</li>
-+          <li>implement getMimeHeaders and MultiCondition</li>
-+          <li>initiate delete/copy/move message</li>
-+          <li>make progress on graph backend implementation</li>
-+          <li>complete properties mapping on message update</li>
-+          <li>some more work on message update logic (PATCH call)</li>
-+          <li>implement getGraphUrl to handle various graph api endpoints</li>
-+          <li>log message download progress, add mailbox attribute to graph message and initiate message flags management</li>
-+          <li>refactor draft message handling, apply workaround (delete/create) only for non draft messages</li>
-+          <li>review buildMessage logic to parse properties</li>
-+          <li>initiate implementation of message handling</li>
-+          <li>compute graphid for distinguishedProperty properties (PublicStrings, InternetHeaders,Common)</li>
-+          <li>initiate create message implementation, with workaround for draft flag</li>
-+          <li>switch to v2.0 OIDC endpoint for graph authentication, adjust token endpoint accordingly</li>
++              <li>handle cancelled occurrences on events to build EXDATE vCalendar properties</li>
++              <li>make progress on event recurrence implementation, see https://learn.microsoft.com/en-us/graph/api/resources/patternedrecurrence</li>
++              <li>initiate recurrence implementation</li>
++              <li>fix draft handling, draft is set for mapi PR_MESSAGE_FLAGS property combined with read flag by IMAPConnection</li>
++              <li>tasks don't have a changeKey field, retrieve etag value from @odata.etag</li>
++              <li>switch back to custom scopes</li>
++              <li>manage task items returned as part of default calendar requests</li>
++              <li>map taskstatus field to status graphId</li>
++              <li>handle item not found with HttpNotFoundException</li>
++              <li>implement isMainCalendar</li>
++              <li>debug ALTDESC for thunderbird, need to urlencode content</li>
++              <li>implement etag search for events and contacts</li>
++              <li>handle html body and attendees for caldav support</li>
++              <li>move convertClassFromExchange and convertClassToExchange to ExchangeSession</li>
++              <li>Checkpoint on event management, new tasks handling based on new todo endpoint and make progress on calendar events</li>
++              <li>Move some reference tables from EwsExchangeSession to ExchangeSession to make them available in GraphExchangeSession</li>
++              <li>Cleanup from audit</li>
++              <li>Additional entry points for graphid value in ExtendedFieldURI</li>
++              <li>implement optDateTimeTimeZone in GraphObject to convert DateTimeTimeZone json objects</li>
++              <li>new TODO objects in graph require Tasks.ReadWrite OIDC scope</li>
++              <li>implement specific date conversion convertCalendarDateToGraph for graph api</li>
++              <li>implement more condition logic and retrieve VTIMEZONE from properties</li>
++              <li>add a full dump of all timezone definitions as graph does not provide a way to retrieve events as VCALENDAR</li>
++              <li>make progress on graph attributes handling, refactor GraphObject</li>
++              <li>implement fileAs on contacts and fix bday handling</li>
++              <li>handle empty boolean custom property, return null for empty email</li>
++              <li>switch to .default for OIDC scopes, will help with outlook desktop tokens, detect 50128 error code using outlook desktop clientid with live.com account</li>
++              <li>refactor GraphObject handling</li>
++              <li>refactor GraphExchangeSession, cleanup code</li>
++              <li>implement custom graphid on Field/ExtendedFieldURI</li>
++              <li>refactor graph properties handling</li>
++              <li>main contact management implementation, create and update contact, handle attached photo</li>
++              <li>implement HttpPut calls and introduce GraphResponse as a wrapper around json response messages</li>
++              <li>improve graphId compute logic, add namespaceGuid for DistinguishedPropertySetType.Address, introduce isNumber to avoid error on empty number fields</li>
++              <li>minimal form submit for live.com authentication</li>
++              <li>implement live.com authentication with simple username/password</li>
++              <li>add additional scopes to send mail, manage contacts and access shared mailboxes</li>
++              <li>Cleanup from audit</li>
++              <li>replace method names with constants</li>
++              <li>fix approximate message and implement message update (properties only)</li>
++              <li>Handle special folders based on well known names</li>
++              <li>implement contact folders management</li>
++              <li>update TestExchangeSessionFolder unit tests for graph backend</li>
++              <li>Implement calendar folder handling</li>
++              <li>Improve logging and performance in GraphRequestBuilder</li>
++              <li>Implement IOUtil.convertToBytes to convert JSON to byte array without creating a string</li>
++              <li>Enhancements for audit</li>
++              <li>Fix iterator, nextLink page can be empty</li>
++              <li>enable GraphExchangeSession in ExchangeSessionFactory</li>
++              <li>implement getMimeHeaders and MultiCondition</li>
++              <li>initiate delete/copy/move message</li>
++              <li>make progress on graph backend implementation</li>
++              <li>complete properties mapping on message update</li>
++              <li>some more work on message update logic (PATCH call)</li>
++              <li>implement getGraphUrl to handle various graph api endpoints</li>
++              <li>log message download progress, add mailbox attribute to graph message and initiate message flags management</li>
++              <li>refactor draft message handling, apply workaround (delete/create) only for non draft messages</li>
++              <li>review buildMessage logic to parse properties</li>
++              <li>initiate implementation of message handling</li>
++              <li>compute graphid for distinguishedProperty properties (PublicStrings, InternetHeaders,Common)</li>
++              <li>initiate create message implementation, with workaround for draft flag</li>
++              <li>switch to v2.0 OIDC endpoint for graph authentication, adjust token endpoint accordingly</li>
 +          </ul>
        </release>
        <release version="6.3.0" date="2025-02-26">
