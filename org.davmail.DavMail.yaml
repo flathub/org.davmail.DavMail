@@ -2,8 +2,6 @@ app-id: org.davmail.DavMail
 runtime: org.freedesktop.Platform
 runtime-version: '25.08'
 sdk: org.freedesktop.Sdk
-sdk-extensions:
-  - org.freedesktop.Sdk.Extension.openjdk11
 finish-args:
   # couldn't get persist to work, needs access to .davmail.properties and davmail.log, could patch source...
   - --filesystem=home
@@ -12,28 +10,28 @@ finish-args:
   - --share=ipc
   # Network access
   - --share=network
-  - --env=JAVA_HOME=/app/jre
+  - --env=JAVA_HOME=jdk
 command: davmail
 build-options:
-  append-path: /usr/lib/sdk/openjdk11/bin
+  append-path: jdk/bin
   env:
-    - --env=JAVA_HOME=/app/jre
+    - --env=JAVA_HOME=jdk
 # Could be done during the build below, but these are all related to relocation
 cleanup-commands:
   - sed -i 's,/usr,/app,g'                        /app/bin/davmail
-  - sed -i 's,JAVA=java,JAVA=/app/jre/bin/java,g' /app/bin/davmail
+  - sed -i 's,JAVA=java,JAVA=/app/lib/jre/bin/java,g' /app/bin/davmail
   - sed -i 's,/usr,/app,g'                        /app/share/applications/org.davmail.DavMail.desktop
   - sed -i 's,Icon=.*,Icon=org.davmail.DavMail,g' /app/share/applications/org.davmail.DavMail.desktop
 modules:
-  - name: openjdk
-    buildsystem: simple
-    build-commands:
-      - /usr/lib/sdk/openjdk11/install.sh
   - name: davmail
     buildsystem: simple
     build-commands:
       # version hack, update this when url changes
       - sed -i s,-trunk,-3627, build.xml
+      - mkdir jdk
+      - tar xzf "jdk.tgz" -C "jdk" --strip 1
+      - mkdir /app/lib
+      - jdk/bin/jlink --add-modules java.base,java.datatransfer,java.desktop,java.naming,jdk.crypto.ec,java.security.jgss,java.security.sasl,java.xml,javafx.base,javafx.controls,javafx.graphics,javafx.swing,javafx.web,jdk.accessibility --output /app/lib/jre --strip-debug --no-man-pages --no-header-files
       - ant/bin/ant prepare-dist
       - install -Dp -m 755 src/bin/davmail /app/bin/davmail
       - install -Dp -m 644 src/desktop/davmail.desktop /app/share/applications/org.davmail.DavMail.desktop
@@ -52,8 +50,19 @@ modules:
         url: https://archive.apache.org/dist/ant/binaries/apache-ant-1.10.2-bin.tar.xz
         sha256: 361c8ad2ed8341416e323e7c28af10a8297170a80fdffba294a5c2031527bb6c
         dest: ant
+      - type: file
+        dest-filename: jdk.tgz
+        url: https://api.azul.com/zulu/download/community/v1.0/bundles/latest/binary/?jdk_version=21&ext=tar.gz&os=linux&arch=x86&hw_bitness=64&bundle_type=jdk&features=fx
+        sha256: 4fe6c67ded08a18c17d4e761eba09d44bd5fcdbbc0eb736a33d7b684b09bc766
+        only-arches:
+          - x86_64
+      - type: file
+        dest-filename: jdk.tgz
+        url: https://api.azul.com/zulu/download/community/v1.0/bundles/latest/binary/?jdk_version=21&ext=tar.gz&os=linux&arch=aarch64&hw_bitness=64&bundle_type=jdk&features=fx
+        sha256: eaa170a36ac157e99b1050d9368a84b37cfedac6a3df57ec3871bd8d3a124f64
+        only-arches:
+          - aarch64
     cleanup:
       - swt*.jar
       - libgrowl*.jar
       - winrun4j*.jar
-
