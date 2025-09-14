@@ -59,7 +59,7 @@ modules:
       - type: file
         dest-filename: jdk.tgz
         url: https://api.azul.com/zulu/download/community/v1.0/bundles/latest/binary/?jdk_version=21&ext=tar.gz&os=linux&arch=aarch64&hw_bitness=64&bundle_type=jdk&features=fx
-        sha256: 4fe6c67ded08a18c17d4e761eba09d44bd5fcdbbc0eb736a33d7b684b09bc766
+        sha256: eaa170a36ac157e99b1050d9368a84b37cfedac6a3df57ec3871bd8d3a124f64
         only-arches:
           - aarch64
     cleanup:
