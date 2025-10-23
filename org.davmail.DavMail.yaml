@@ -43,7 +43,7 @@ modules:
     sources:
       - type: archive
         url: https://sourceforge.net/projects/davmail/files/davmail/6.5.0/davmail-src-6.5.0-3847.tgz
-        sha256: 0934707ceaf54f19b96d489a0e2f51081d00d538e700a75738abc07c489c4259
+        sha256: 6ab0a2f58bd6cd33feec348479870c83a733f837c1b3990e0eed995a5f942558
       - type: patch
         path: 0001-davmail-validate-appdata.patch
       - type: archive
