@@ -42,8 +42,8 @@ modules:
       - find dist -name *.jar -exec install -Dp -m 644 "{}" /app/share/davmail/lib/ \;
     sources:
       - type: archive
-        url: https://sourceforge.net/projects/davmail/files/davmail/6.4.0/davmail-src-6.4.0-3755.tgz
-        sha256: 0934707ceaf54f19b96d489a0e2f51081d00d538e700a75738abc07c489c4259
+        url: https://sourceforge.net/projects/davmail/files/davmail/6.5.0/davmail-src-6.5.0-3850.tgz
+        sha256: 970cb8bcf65bc1b3202dba763865632582236c0e89c9ff6d14901e492a8b809a
       - type: patch
         path: 0001-davmail-validate-appdata.patch
       - type: archive
