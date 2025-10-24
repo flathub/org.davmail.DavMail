@@ -1,3 +1,9 @@
+Subject: [PATCH] davmail: fix appdata
+---
+===================================================================
+diff --git a/src/appstream/org.davmail.DavMail.appdata.xml b/src/appstream/org.davmail.DavMail.appdata.xml
+--- a/src/appstream/org.davmail.DavMail.appdata.xml	(revision 3847)
++++ b/src/appstream/org.davmail.DavMail.appdata.xml	(patch)
 --- org.davmail.DavMail.appdata.xml
 +++ org.davmail.DavMail.appdata.xml
 @@ -27,7 +27,7 @@
