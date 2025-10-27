@@ -25,7 +25,7 @@ modules:
     buildsystem: simple
     build-commands:
       # version hack, update this when url changes
-      - sed -i s,-trunk,-3850, build.xml
+      #- sed -i s,-trunk,-3850, build.xml
       - mkdir jdk
       - tar xzf "jdk.tgz" -C "jdk" --strip 1
       - mkdir /app/lib
@@ -46,16 +46,18 @@ modules:
       - unzip swt.zip -d swt
       - install -Dp -m 644 swt/swt.jar /app/share/davmail/lib/
     sources:
-      - type: archive
-        url: https://github.com/mguessan/davmail/archive/refs/heads/master.zip
-        sha256: 9dc68e4968fcb48f322091a95fd8118b6dc3611f973b406c05c1f8c71513685b
+      - type: svn
+        url: https://svn.code.sf.net/p/davmail/code/trunk
+      #- type: git
+      #  url: https://github.com/mguessan/davmail.git
+      #  branch: master
       #        url: https://sourceforge.net/projects/davmail/files/davmail/6.5.0/davmail-src-6.5.0-3850.tgz
       #        sha256: 970cb8bcf65bc1b3202dba763865632582236c0e89c9ff6d14901e492a8b809a
       - type: patch
         path: 0001-davmail-validate-appdata.patch
       - type: archive
-        url: https://archive.apache.org/dist/ant/binaries/apache-ant-1.10.2-bin.tar.xz
-        sha256: 361c8ad2ed8341416e323e7c28af10a8297170a80fdffba294a5c2031527bb6c
+        url: https://archive.apache.org/dist/ant/binaries/apache-ant-1.10.15-bin.tar.xz
+        sha256: 4d5bb20cee34afbad17782de61f4f422c5a03e4d2dffc503bcbd0651c3d3c396
         dest: ant
       - type: file
         dest-filename: jdk.tgz
