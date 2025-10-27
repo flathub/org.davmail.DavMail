@@ -1,10 +1,8 @@
 app-id: org.davmail.DavMail
-runtime: org.freedesktop.Platform
-runtime-version: '25.08'
-sdk: org.freedesktop.Sdk
+runtime: org.gnome.Platform
+runtime-version: '49'
+sdk: org.gnome.Sdk
 finish-args:
-  # couldn't get persist to work, needs access to .davmail.properties and davmail.log, could patch source...
-  - --filesystem=home
   # X11 access
   - --socket=x11
   - --share=ipc
@@ -45,10 +43,14 @@ modules:
       - install -Dp -m 644 dist/davmail.jar /app/share/davmail/davmail.jar
       - mkdir -p /app/share/davmail/lib
       - find dist -name *.jar -exec install -Dp -m 644 "{}" /app/share/davmail/lib/ \;
+      - unzip swt.zip -d swt
+      - install -Dp -m 644 swt/swt.jar /app/share/davmail/lib/
     sources:
       - type: archive
-        url: https://sourceforge.net/projects/davmail/files/davmail/6.5.0/davmail-src-6.5.0-3850.tgz
-        sha256: 970cb8bcf65bc1b3202dba763865632582236c0e89c9ff6d14901e492a8b809a
+        url: https://github.com/mguessan/davmail/archive/refs/heads/master.zip
+        sha256: 9dc68e4968fcb48f322091a95fd8118b6dc3611f973b406c05c1f8c71513685b
+      #        url: https://sourceforge.net/projects/davmail/files/davmail/6.5.0/davmail-src-6.5.0-3850.tgz
+      #        sha256: 970cb8bcf65bc1b3202dba763865632582236c0e89c9ff6d14901e492a8b809a
       - type: patch
         path: 0001-davmail-validate-appdata.patch
       - type: archive
@@ -65,6 +67,18 @@ modules:
         dest-filename: jdk.tgz
         url: https://api.azul.com/zulu/download/community/v1.0/bundles/latest/binary/?jdk_version=21&ext=tar.gz&os=linux&arch=aarch64&hw_bitness=64&bundle_type=jdk&features=fx
         sha256: eaa170a36ac157e99b1050d9368a84b37cfedac6a3df57ec3871bd8d3a124f64
+        only-arches:
+          - aarch64
+      - type: file
+        dest-filename: swt.zip
+        url: https://www.eclipse.org/downloads/download.php?file=/eclipse/downloads/drops4/R-4.37-202509050730/swt-4.37-gtk-linux-x86_64.zip&mirror_id=1
+        sha256: 13ff4f7061078c03e17a2ace3c47931bca34cd5ad17494ee8cfc46780bb057db
+        only-arches:
+          - x86_64
+      - type: file
+        dest-filename: swt.zip
+        url: https://www.eclipse.org/downloads/download.php?file=/eclipse/downloads/drops4/R-4.37-202509050730/swt-4.37-gtk-linux-aarch64.zip&mirror_id=1
+        sha256: e41352cee8753c3afc72c5198abf1397779529557752b276f8bd05c1f0054ae4
         only-arches:
           - aarch64
     cleanup:
