@@ -53,8 +53,8 @@ modules:
       #  branch: master
       #        url: https://sourceforge.net/projects/davmail/files/davmail/6.5.0/davmail-src-6.5.0-3850.tgz
       #        sha256: 970cb8bcf65bc1b3202dba763865632582236c0e89c9ff6d14901e492a8b809a
-      - type: patch
-        path: 0001-davmail-validate-appdata.patch
+      # - type: patch
+      #  path: 0001-davmail-validate-appdata.patch
       - type: archive
         url: https://archive.apache.org/dist/ant/binaries/apache-ant-1.10.15-bin.tar.xz
         sha256: 4d5bb20cee34afbad17782de61f4f422c5a03e4d2dffc503bcbd0651c3d3c396
