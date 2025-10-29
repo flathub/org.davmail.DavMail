@@ -33,7 +33,6 @@ modules:
       - ant/bin/ant prepare-release
       - rm dist/lib/hamcrest-core-*.jar
       - rm dist/lib/junit-*.jar
-      - rm dist/lib/sonarqube-*.jar
       - rm dist/lib/swt-*.jar
       - install -Dp -m 755 src/bin/davmail /app/bin/davmail
       - install -Dp -m 644 src/desktop/davmail.desktop /app/share/applications/org.davmail.DavMail.desktop
