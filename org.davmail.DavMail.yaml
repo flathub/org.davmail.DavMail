@@ -32,7 +32,6 @@ modules:
       - jdk/bin/jlink --add-modules java.base,java.datatransfer,java.desktop,java.naming,jdk.crypto.ec,java.security.jgss,java.security.sasl,java.xml,javafx.base,javafx.controls,javafx.graphics,javafx.swing,javafx.web,jdk.accessibility --output /app/lib/jre --strip-debug --no-man-pages --no-header-files
       - ant/bin/ant prepare-release
       - rm dist/lib/hamcrest-core-*.jar
-      - rm dist/lib/jacocoant-*.jar
       - rm dist/lib/junit-*.jar
       - rm dist/lib/sonarqube-*.jar
       - rm dist/lib/swt-*.jar
