@@ -47,7 +47,7 @@ modules:
       - install -Dp -m 644 swt/swt.jar /app/share/davmail/lib/
     sources:
       - type: svn
-        url: https://svn.code.sf.net/p/davmail/code/trunk
+        url: https://svn.code.sf.net/p/davmail/code/tags/6.5.1
       #- type: git
       #  url: https://github.com/mguessan/davmail.git
       #  branch: master
