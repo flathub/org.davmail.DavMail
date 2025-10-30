@@ -1,10 +1,8 @@
 app-id: org.davmail.DavMail
-runtime: org.freedesktop.Platform
-runtime-version: '25.08'
-sdk: org.freedesktop.Sdk
+runtime: org.gnome.Platform
+runtime-version: '49'
+sdk: org.gnome.Sdk
 finish-args:
-  # couldn't get persist to work, needs access to .davmail.properties and davmail.log, could patch source...
-  - --filesystem=home
   # X11 access
   - --socket=x11
   - --share=ipc
@@ -27,28 +25,30 @@ modules:
     buildsystem: simple
     build-commands:
       # version hack, update this when url changes
-      - sed -i s,-trunk,-3627, build.xml
+      #- sed -i s,-trunk,-3850, build.xml
       - mkdir jdk
       - tar xzf "jdk.tgz" -C "jdk" --strip 1
       - mkdir /app/lib
       - jdk/bin/jlink --add-modules java.base,java.datatransfer,java.desktop,java.naming,jdk.crypto.ec,java.security.jgss,java.security.sasl,java.xml,javafx.base,javafx.controls,javafx.graphics,javafx.swing,javafx.web,jdk.accessibility --output /app/lib/jre --strip-debug --no-man-pages --no-header-files
-      - ant/bin/ant prepare-dist
+      - ant/bin/ant prepare-release
+      - rm dist/lib/hamcrest-core-*.jar
+      - rm dist/lib/junit-*.jar
+      - rm dist/lib/swt-*.jar
       - install -Dp -m 755 src/bin/davmail /app/bin/davmail
       - install -Dp -m 644 src/desktop/davmail.desktop /app/share/applications/org.davmail.DavMail.desktop
-      - install -Dp -m 644 dist/davmail.png /app/share/icons/hicolor/128x128/apps/org.davmail.DavMail.png
+      - install -Dp -m 644 src/icon/davmail.png /app/share/icons/hicolor/128x128/apps/org.davmail.DavMail.png
       - install -Dp -m 644 src/appstream/org.davmail.DavMail.appdata.xml --target-directory=/app/share/appdata
       - install -Dp -m 644 dist/davmail.jar /app/share/davmail/davmail.jar
       - mkdir -p /app/share/davmail/lib
       - find dist -name *.jar -exec install -Dp -m 644 "{}" /app/share/davmail/lib/ \;
+      - unzip swt.zip -d swt
+      - install -Dp -m 644 swt/swt.jar /app/share/davmail/lib/
     sources:
+      - type: svn
+        url: https://svn.code.sf.net/p/davmail/code/tags/6.5.1
       - type: archive
-        url: https://sourceforge.net/projects/davmail/files/davmail/6.5.0/davmail-src-6.5.0-3850.tgz
-        sha256: 970cb8bcf65bc1b3202dba763865632582236c0e89c9ff6d14901e492a8b809a
-      - type: patch
-        path: 0001-davmail-validate-appdata.patch
-      - type: archive
-        url: https://archive.apache.org/dist/ant/binaries/apache-ant-1.10.2-bin.tar.xz
-        sha256: 361c8ad2ed8341416e323e7c28af10a8297170a80fdffba294a5c2031527bb6c
+        url: https://archive.apache.org/dist/ant/binaries/apache-ant-1.10.15-bin.tar.xz
+        sha256: 4d5bb20cee34afbad17782de61f4f422c5a03e4d2dffc503bcbd0651c3d3c396
         dest: ant
       - type: file
         dest-filename: jdk.tgz
@@ -62,7 +62,18 @@ modules:
         sha256: eaa170a36ac157e99b1050d9368a84b37cfedac6a3df57ec3871bd8d3a124f64
         only-arches:
           - aarch64
+      - type: file
+        dest-filename: swt.zip
+        url: https://www.eclipse.org/downloads/download.php?file=/eclipse/downloads/drops4/R-4.37-202509050730/swt-4.37-gtk-linux-x86_64.zip&mirror_id=1
+        sha256: 13ff4f7061078c03e17a2ace3c47931bca34cd5ad17494ee8cfc46780bb057db
+        only-arches:
+          - x86_64
+      - type: file
+        dest-filename: swt.zip
+        url: https://www.eclipse.org/downloads/download.php?file=/eclipse/downloads/drops4/R-4.37-202509050730/swt-4.37-gtk-linux-aarch64.zip&mirror_id=1
+        sha256: e41352cee8753c3afc72c5198abf1397779529557752b276f8bd05c1f0054ae4
+        only-arches:
+          - aarch64
     cleanup:
-      - swt*.jar
       - libgrowl*.jar
       - winrun4j*.jar
