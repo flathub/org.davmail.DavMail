@@ -6,6 +6,7 @@ finish-args:
   # X11 access
   - --socket=x11
   - --share=ipc
+  - --device=dri
   # Network access
   - --share=network
   - --env=JAVA_HOME=jdk
