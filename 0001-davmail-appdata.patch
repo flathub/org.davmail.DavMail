@@ -1,5 +1,5 @@
---- src/appstream/org.davmail.DavMail.appdata.xml
-+++ src/appstream/org.davmail.DavMail.appdata.xml
+--- davmail/src/appstream/org.davmail.DavMail.appdata.xml
++++ davmail/src/appstream/org.davmail.DavMail.appdata.xml
 @@ -63,7 +63,6 @@
                <p>Bugfix release based on user feedback, add PhoneAppOTP (TOTP) support for MFA authentication,
                    more work on Graph backend, mostly on Caldav implementation.
