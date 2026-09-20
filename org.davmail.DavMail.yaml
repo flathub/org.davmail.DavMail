@@ -40,11 +40,11 @@ modules:
       - install -Dp -m 644 dist/davmail.jar /app/share/davmail/davmail.jar
       - mkdir -p /app/share/davmail/lib
       - find dist -name *.jar -exec install -Dp -m 644 "{}" /app/share/davmail/lib/ \;
-      - unzip swt.zip -d swt
-      - install -Dp -m 644 swt/swt.jar /app/share/davmail/lib/
+#      - unzip swt.zip -d swt
+#      - install -Dp -m 644 swt/swt.jar /app/share/davmail/lib/
     sources:
       - type: svn
-        url: https://svn.code.sf.net/p/davmail/code/tags/6.8.1
+        url: https://svn.code.sf.net/p/davmail/code/tags/7.0.0
       - type: archive
         url: https://archive.apache.org/dist/ant/binaries/apache-ant-1.10.15-bin.tar.xz
         sha256: 4d5bb20cee34afbad17782de61f4f422c5a03e4d2dffc503bcbd0651c3d3c396
@@ -61,18 +61,18 @@ modules:
         sha256: eaa170a36ac157e99b1050d9368a84b37cfedac6a3df57ec3871bd8d3a124f64
         only-arches:
           - aarch64
-      - type: file
-        dest-filename: swt.zip
-        url: https://www.eclipse.org/downloads/download.php?file=/eclipse/downloads/drops4/R-4.37-202509050730/swt-4.37-gtk-linux-x86_64.zip&mirror_id=1
-        sha256: 13ff4f7061078c03e17a2ace3c47931bca34cd5ad17494ee8cfc46780bb057db
-        only-arches:
-          - x86_64
-      - type: file
-        dest-filename: swt.zip
-        url: https://www.eclipse.org/downloads/download.php?file=/eclipse/downloads/drops4/R-4.37-202509050730/swt-4.37-gtk-linux-aarch64.zip&mirror_id=1
-        sha256: e41352cee8753c3afc72c5198abf1397779529557752b276f8bd05c1f0054ae4
-        only-arches:
-          - aarch64
+#      - type: file
+#        dest-filename: swt.zip
+#        url: https://www.eclipse.org/downloads/download.php?file=/eclipse/downloads/drops4/R-4.37-202509050730/swt-4.37-gtk-linux-x86_64.zip&mirror_id=1
+#        sha256: 13ff4f7061078c03e17a2ace3c47931bca34cd5ad17494ee8cfc46780bb057db
+#        only-arches:
+#          - x86_64
+#      - type: file
+#        dest-filename: swt.zip
+#        url: https://www.eclipse.org/downloads/download.php?file=/eclipse/downloads/drops4/R-4.37-202509050730/swt-4.37-gtk-linux-aarch64.zip&mirror_id=1
+#        sha256: e41352cee8753c3afc72c5198abf1397779529557752b276f8bd05c1f0054ae4
+#        only-arches:
+#          - aarch64
     cleanup:
       - libgrowl*.jar
       - winrun4j*.jar
